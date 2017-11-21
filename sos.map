@@ -27,21 +27,35 @@ MAP
   END
 
   LAYER
-    NAME "test_sos_layer"
+    NAME "sensor"
     METADATA
-      "sos_procedure"  "1" ## REQUIRED
+      "sos_procedure"  "1" ## REQUIRED: sensor n°1
+      #"sos_procedure_item" "station_id" ## see https://github.com/mapserver/mapserver/issues/2050
       "sos_offering_id" "rennes" ## REQUIRED
       "sos_timeitem" "timestamp"
       "sos_offering_timeextent" "2016-10-11/2016-10-17"
-      "sos_observedproperty_id" "nb_total" ## REQUIRED
-      "sos_describesensor_url" "http://some/url/NS01EE0014.xml" ## REQUIRED
+      "sos_observedproperty_id" "vehicles" ## REQUIRED
+      "sos_observedproperty_name" "Number of vehicles in the time interval"
+      "sos_describesensor_url" "http://some/url/sensor.xml" ## REQUIRED - manually generated for now
+
+      "sos_vehicles_alias" "vehicles"
+      "sos_vehicles_definition" "total number of vehicles"
+      "sos_vehicles_uom" "urn:ogc:object:uom"
+
+      "sos_vl_alias" "vl"
+      "sos_vl_definition" "total number of light vehicles"
+      "sos_vl_uom" "urn:ogc:object:uom"
+
+      "sos_pl_alias" "pl"
+      "sos_pl_definition" "total number of heavy vehicles"
+      "sos_pl_uom" "urn:ogc:object:uom"
     END
     TYPE POINT
     STATUS ON
     
     CONNECTIONTYPE postgis
     CONNECTION "dbname=sos user=www-data password=www-data host=db port=5432"
-    DATA "shape from (select s.shape as shape, c.nb_total as nb_total, c.date_tmst as timestamp from mobilite_transp.comptage_automatique c left join mobilite_transp.comptage_station s on c.station_id = s.station_id where c.station_id=1) as foo using unique timestamp using srid=3948"
+    DATA "shape from (select s.shape as shape, c.nb_total as vehicles, c.nb_pl as pl, c.nb_vl as vl, c.date_tmst as timestamp from mobilite_transp.comptage_automatique c left join mobilite_transp.comptage_station s on c.station_id = s.station_id where c.station_id = 1) as foo using unique timestamp using srid=3948"
 
     PROJECTION
       "init=epsg:3948"
