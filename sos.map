@@ -29,8 +29,10 @@ MAP
   LAYER
     NAME "test_sos_layer"
     METADATA
-      "sos_procedure"  "NS01EE0014" ## REQUIRED
-      "sos_offering_id" "WQ1289" ## REQUIRED
+      "sos_procedure"  "1" ## REQUIRED
+      "sos_offering_id" "rennes" ## REQUIRED
+      "sos_timeitem" "timestamp"
+      "sos_offering_timeextent" "2016-10-11/2016-10-17"
       "sos_observedproperty_id" "nb_total" ## REQUIRED
       "sos_describesensor_url" "http://some/url/NS01EE0014.xml" ## REQUIRED
     END
