@@ -15,7 +15,7 @@ MAP
     IMAGEURL "/tmp/"
 
     METADATA
-      "sos_onlineresource" "http://127.0.0.1/mapserv?map=/etc/mapserver/mapserver.map" ## REQUIRED
+      "sos_onlineresource" "http://localhost:8080/mapserv?map=/etc/mapserver/mapserver.map" ## REQUIRED
       "sos_title"          "My SOS Demo Server" ## Recommended
       "sos_srs"            "EPSG:4326" ## REQUIRED
       "sos_enable_request" "*" ## REQUIRED
