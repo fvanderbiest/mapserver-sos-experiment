@@ -1,0 +1,26 @@
+version: '2'
+
+# http://localhost:8080/?MAP=/etc/mapserver/mapserver.map&SERVICE=SOS&Request=GetObservation&Offering=WQ1289&observedproperty=nb_total&version=1.0.0&responseFormat=text/xml;%20subtype=%22om/1.0.0%22
+
+services:
+  mapserver:
+    image: camptocamp/mapserver:latest
+    ports:
+      - "8080:80"
+    links:
+      - db
+    volumes:
+      - ./sos.map:/etc/mapserver/mapserver.map
+
+  db:
+    image: camptocamp/postgres:9.6
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    environment:
+      POSTGRES_USER: www-data
+      POSTGRES_PASSWORD: www-data
+      POSTGRES_DB: sos
+    # Uncomment following line to have database show all incoming SQL statements
+    command: postgres -c log_statement=all
+    ports:
+      - 15432:5432

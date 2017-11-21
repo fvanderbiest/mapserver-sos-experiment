@@ -1,0 +1,58 @@
+MAP
+  NAME "SOS_DEMO"
+  STATUS ON
+  SIZE 300 300
+  EXTENT -20 40 60 50
+  UNITS METERS
+  SHAPEPATH "./data/"
+  IMAGECOLOR 255 255 0
+#  SYMBOLSET "./etc/symbols.sym"
+
+  IMAGETYPE png
+
+  WEB
+    IMAGEPATH "/tmp/ms_tmp/"
+    IMAGEURL "/tmp/"
+
+    METADATA
+      "sos_onlineresource" "http://127.0.0.1/mapserv?map=/etc/mapserver/mapserver.map" ## REQUIRED
+      "sos_title"          "My SOS Demo Server" ## Recommended
+      "sos_srs"            "EPSG:4326" ## REQUIRED
+      "sos_enable_request" "*" ## REQUIRED
+    END
+  END
+
+  PROJECTION
+    "init=epsg:4326"
+  END
+
+  LAYER
+    NAME "test_sos_layer"
+    METADATA
+      "sos_procedure"  "NS01EE0014" ## REQUIRED
+      "sos_offering_id" "WQ1289" ## REQUIRED
+      "sos_observedproperty_id" "nb_total" ## REQUIRED
+      "sos_describesensor_url" "http://some/url/NS01EE0014.xml" ## REQUIRED
+    END
+    TYPE POINT
+    STATUS ON
+    
+    CONNECTIONTYPE postgis
+    CONNECTION "dbname=sos user=www-data password=www-data host=db port=5432"
+    DATA "shape from (select s.shape as shape, c.nb_total as nb_total, c.date_tmst as timestamp from mobilite_transp.comptage_automatique c left join mobilite_transp.comptage_station s on c.station_id = s.station_id where c.station_id=1) as foo using unique timestamp using srid=3948"
+
+    PROJECTION
+      "init=epsg:3948"
+    END
+
+    CLASS
+      NAME "station"
+      STYLE
+        COLOR 255 0 0
+        SYMBOL "circle"
+        SIZE 8
+      END
+    END
+  END
+
+END #map
