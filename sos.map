@@ -18,7 +18,7 @@ MAP
       "sos_onlineresource" "http://localhost:8080/mapserv?map=/etc/mapserver/mapserver.map" ## REQUIRED
       "sos_title"          "My SOS Demo Server" ## Recommended
       "sos_srs"            "EPSG:4326" ## REQUIRED
-      "sos_enable_request" "*" ## REQUIRED
+      "ows_enable_request" "*" ## REQUIRED
     END
   END
 
