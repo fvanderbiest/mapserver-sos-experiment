@@ -8,13 +8,16 @@ Data comes from a road traffic sensor, aggregated on a hourly basis.
 
 ## Service
 
-Run the mapserver service with `docker-compose up` and open http://localhost:8080/mapserv?MAP=/etc/mapserver/mapserver.map&SERVICE=SOS&REQUEST=GetCapabilities
+Run the services with `docker-compose up`
 
 Example queries:
+ * GetCapabilities
+   * http://localhost:8080/mapserv?MAP=/etc/mapserver/mapserver.map&SERVICE=SOS&REQUEST=GetCapabilities 
  * GetObservation 
    * http://localhost:8080/mapserv?MAP=/etc/mapserver/mapserver.map&SERVICE=SOS&Request=GetObservation&offering=rennes&observedproperty=vehicles&version=1.0.0&responseFormat=text/xml;%20subtype=%22om/1.0.0%22
    * http://localhost:8080/mapserv?MAP=/etc/mapserver/mapserver.map&SERVICE=SOS&Request=GetObservation&offering=rennes&observedproperty=vehicles&version=1.0.0&responseFormat=text/xml;%20subtype=%22om/1.0.0%22&resultModel=om:Observation
  * ...
+
 
 ## Client
 
