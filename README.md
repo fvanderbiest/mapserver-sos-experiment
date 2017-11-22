@@ -36,4 +36,4 @@ The SOS getCapabilities request succeeds, but the next request, which is a POST 
 <GetFeatureOfInterest xmlns="http://www.opengis.net/sos/1.0" version="1.0.0" service="SOS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sos/1.0 http://schemas.opengis.net/sos/1.0.0/sosAll.xsd"><FeatureOfInterestId>urn:ogc:def:feature:OGC-SWE:3:transient</FeatureOfInterestId></GetFeatureOfInterest>
 ```
 
-Indeed, MapServer does not seem to support POST SOS requests, while OpenLayers is currently designed to use POST requests for `sos:GetFeatureOfInterest`, see https://github.com/openlayers/ol2/blob/e85a087c8fb857648aa7c5e4f771d1d2a13fc48b/lib/OpenLayers/Protocol/SOS/v1_0_0.js#L76-L83.
+Indeed, MapServer does not support `GetFeatureOfInterest` requests at the moment.
